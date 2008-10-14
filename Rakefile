@@ -1,6 +1,16 @@
 require 'rake'
 require 'rake/testtask'
 require 'rake/rdoctask'
+require 'rake/gempackagetask'
+
+spec = eval(File.read("#{File.dirname(__FILE__)}/acts_as_taggable_on_steroids.gemspec"))
+PKG_NAME = spec.name
+PKG_VERSION = spec.version
+ 
+Rake::GemPackageTask.new(spec) do |pkg|
+  pkg.need_zip = true
+  pkg.need_tar = true
+end
 
 desc 'Default: run unit tests.'
 task :default => :test
